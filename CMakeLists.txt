@@ -21,6 +21,7 @@ FetchContent_MakeAvailable(googletest)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_subdirectory(tokens)
+add_subdirectory(src)
 
 
 
