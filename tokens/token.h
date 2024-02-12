@@ -16,6 +16,6 @@ struct token_t {
 };
 
 // Function declarations
-struct token_t get_next_token(void);
+struct token_t get_next_token(char *input);
 
 #endif // TOKEN_H
