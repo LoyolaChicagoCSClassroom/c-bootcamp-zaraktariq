@@ -36,3 +36,19 @@ struct token_t get_next_token(char **input) {
 
     return token;
 }
+
+const char *token_type_to_string(enum token_type_t type) {
+    if (type == NUMBER) {
+        return "Number";
+    } else if (type == OPERATOR) {
+        return "Operator:";
+    } else if (type == SYMBOL) {
+        return "Symbol";
+    } else if (type == WORD) {
+        return "Word";
+    } else if (type == END_OF_FILE) {
+        return "EndOfFile";
+    } else {
+        return "Unknown";
+    }
+}
