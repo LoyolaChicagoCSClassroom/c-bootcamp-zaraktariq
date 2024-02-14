@@ -4,16 +4,9 @@
 #include <string.h>
 #include "token.h"
 
-struct token_t get_next_token(char **input) {
-    // split tokens on whitespace
-    char **token_str = stringtoken(*input, " \t\n");
-
-    // consider the EOF
-    if (token_str == NULL) {
-        // handel the end of the string/token with grace and create a token for its conclusion
-        struct token_t end_token = {END_OF_FILE, NULL};
-            return end_token;
-    }
+char *generateSpaceless(char *input) {
+    return strtok(input, " ");
+}
 
     // create token
 TOKEN parseToken(char *token) {
@@ -25,6 +18,8 @@ TOKEN parseToken(char *token) {
         returnToken.type = SYMBOL;
     } else if (isdigit(*token)) {
         returnToken.type = NUMBER;
+    } else if (strcmp(token, "EOF") == 0) {
+        returnToken.type = END_OF_FILE;
     } else {
         returnToken.type = WORD;
     }
