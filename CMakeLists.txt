@@ -20,13 +20,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_subdirectory(tokens)
-add_subdirectory(src)
-
-
+add_subdirectory(main)
 
 # You can use add_subdirectory() to add your own work. 
 # Please don't remove the existing subdirectories.
-
-
-
