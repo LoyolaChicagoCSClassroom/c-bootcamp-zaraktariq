@@ -1,33 +1,33 @@
 // token.c
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "token.h"  // Include the token header file
+#include "token.h"
 
 // Function to remove spaces from input
-char *generateSpaceless(char *input) {
+char *generateSpaceless(const char *input) {
     return strtok(input, " ");
 }
 
 // Function to create a token based on input
-TOKEN parseToken(char *token) {
+TOKEN parseToken(const char *token_str) {
     TOKEN returnToken;
 
     // Determine the type of token
-    if (*token == '+' || *token == '-' || *token == '*' || *token == '/') {
-        returnToken.type = OPERATOR;
-    } else if (*token == ':' || *token == ';') {
-        returnToken.type = SYMBOL;
-    } else if (isdigit(*token)) {
+    if (isdigit(token_str[0]) || (token_str[0] == '-' && isdigit(token_str[1]))) {
         returnToken.type = NUMBER;
-    } else if (strcmp(token, "EOF") == 0) {
-        returnToken.type = END_OF_FILE;
+    } else if (strcmp(token_str, "+") == 0 || strcmp(token_str, "-") == 0 ||
+               strcmp(token_str, "*") == 0 || strcmp(token_str, "/") == 0) {
+        returnToken.type = OPERATOR;
+    } else if (strcmp(token_str, ":") == 0 || strcmp(token_str, ";") == 0) {
+        returnToken.type = SYMBOL;
     } else {
         returnToken.type = WORD;
     }
 
     // Set the text of the token
-    returnToken.text = strdup(token);
+    returnToken.text = strdup(token_str);
 
     return returnToken;
 }
@@ -43,8 +43,8 @@ const char *tokenTypeToString(enum token_type_t type) {
             return "Symbol";
         case WORD:
             return "Word";
-        case END_OF_FILE:
-            return "EndOfFile";
+        case INVALID:
+            return "Invalid";
         default:
             return "Unknown";
     }
