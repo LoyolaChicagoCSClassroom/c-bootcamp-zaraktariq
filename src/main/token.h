@@ -10,12 +10,15 @@ enum token_type_t {
     END_OF_FILE
 };
 
-struct token_t {
+typedef struct token_t {
     enum token_type_t type;
     char *text;
-};
+} TOKEN;
 
-// Function declarations
-struct token_t get_next_token(char *input);
+TOKEN parseToken(char *token);
+
+const char *tokenTypeToString(enum token_type_t type);
+
+char *generateSpaceless(char *input);
 
 #endif // TOKEN_H

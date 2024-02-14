@@ -16,25 +16,22 @@ struct token_t get_next_token(char **input) {
     }
 
     // create token
-    struct token_t token;
+TOKEN parseToken(char *token) {
+    TOKEN returnToken;
 
-    if (isdigit(token_str[0])) {
-        token.type = NUMBER;
-    } else if (strcmp(token_str, "+") == 0 || strcmp(token_str, "-") == 0 || strcmp(token_str, "*") == 0|| strcmp(token_str, "/") == 0 ) {
-        token.type = OPERATOR;
-    } else if (strcmp(token_str, ";") == 0 || strcmp(token_str, ":") == 0) {
-        token.type = SYMBOL;
+    if (*token == '+' || *token == '-' || *token == '*' || *token == '/') {
+        returnToken.type = OPERATOR;
+    } else if (*token == ':' || *token == ';') {
+        returnToken.type = SYMBOL;
+    } else if (isdigit(*token)) {
+        returnToken.type = NUMBER;
     } else {
-        token.type = WORD;
+        returnToken.type = WORD;
     }
-    
-    /*The strdup function is a standard C library function that stands for "string duplicate."
-    It takes a string (token_str in this case) as an argument, allocates memory for a new string of the same length, 
-    and copies the content of the original string into the new one. 
-    The result is a pointer to the newly allocated string.*/
-    token.text = strdup(token_str);
 
-    return token;
+    returnToken.text = strdup(token);
+
+    return returnToken;
 }
 
 const char *token_type_to_string(enum token_type_t type) {
