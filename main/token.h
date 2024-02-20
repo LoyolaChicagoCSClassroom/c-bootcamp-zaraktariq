@@ -8,7 +8,7 @@ enum token_type_t {
     OPERATOR,
     SYMBOL,
     WORD,
-    END_OF_FILE
+    INVALID
 };
 
 // Structure to represent a token
@@ -18,8 +18,8 @@ typedef struct token_t {
 } TOKEN;
 
 // Function prototypes
-char *generateSpaceless(char *input);
-TOKEN parseToken(char *token);
+char *generateSpaceless(const char *input);
+TOKEN parseToken(const char *token);
 const char *tokenTypeToString(enum token_type_t type);
 
 #endif // TOKEN_H
