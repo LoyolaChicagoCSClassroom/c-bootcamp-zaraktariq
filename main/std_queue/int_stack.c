@@ -101,3 +101,89 @@ int int_stack_size(int_stack_t* stk) {
 int int_stack_capacity(int_stack_t* stk) {
     return stk->capacity;
 }
+
+// New FORTH language stack operations
+
+int int_stack_over(int_stack_t *stk) {
+    if (stk->size < 2) {
+        return 0; // Not enough elements
+    }
+    int_entry_t *second_entry = SLIST_FIRST(&stk->head)->entries.sle_next;
+    return int_stack_push(stk, second_entry->value); // Duplicates the second-to-top element
+}
+
+int int_stack_rot(int_stack_t *stk) {
+    if (stk->size < 3) {
+        return 0; // Not enough elements
+    }
+    int first, second, third;
+    int_stack_pop(stk, &first);
+    int_stack_pop(stk, &second);
+    int_stack_pop(stk, &third);
+    int_stack_push(stk, second);
+    int_stack_push(stk, first);
+    int_stack_push(stk, third);
+    return 1; // Success
+}
+
+int int_stack_drop(int_stack_t *stk) {
+    if (stk->size < 1) {
+        return 0; // Stack is empty
+    }
+    int dummy;
+    return int_stack_pop(stk, &dummy); // Removes the top element
+}
+
+int int_stack_2swap(int_stack_t *stk) {
+    if (stk->size < 4) {
+        return 0; // Not enough elements
+    }
+    int first, second, third, fourth;
+    int_stack_pop(stk, &first);
+    int_stack_pop(stk, &second);
+    int_stack_pop(stk, &third);
+    int_stack_pop(stk, &fourth);
+    int_stack_push(stk, third);
+    int_stack_push(stk, fourth);
+    int_stack_push(stk, second);
+    int_stack_push(stk, first);
+    return 1; // Success
+}
+
+int int_stack_2dup(int_stack_t *stk) {
+    if (stk->size < 2) {
+        return 0; // Not enough elements
+    }
+    int top_value, next_to_top_value;
+    int_stack_pop(stk, &top_value);
+    int_stack_pop(stk, &next_to_top_value);
+    int_stack_push(stk, next_to_top_value);
+    int_stack_push(stk, top_value);
+    int_stack_push(stk, next_to_top_value);
+    int_stack_push(stk, top_value);
+    return 1; // Success
+}
+
+int int_stack_2over(int_stack_t *stk) {
+    if (stk->size < 4) {
+        return 0; // Not enough elements
+    }
+    int_entry_t *entry = SLIST_FIRST(&stk->head);
+    for (int i = 0; i < 2; i++) {
+        entry = entry->entries.sle_next;
+    }
+    int third_to_top = entry->value;
+    int fourth_to_top = entry->entries.sle_next->value;
+    int_stack_push(stk, fourth_to_top);
+    int_stack_push(stk, third_to_top);
+    return 1; // Success
+}
+
+int int_stack_2drop(int_stack_t *stk) {
+    if (stk->size < 2) {
+        return 0; // Not enough elements
+    }
+    int_stack_drop(stk);
+    int_stack_drop(stk);
+    return 1; // Success
+}
