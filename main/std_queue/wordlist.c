@@ -32,4 +32,3 @@ void wordlist_init(struct wordlist_t *head_ptr) {
     /* create a tail queue */
     TAILQ_INIT(head_ptr);
 }
-

@@ -1,4 +1,5 @@
 // main.c
+#include "wordlist.h"
 #include "int_stack.h"
 #include <stdio.h>
 
@@ -48,4 +49,3 @@ int main() {
     int_stack_print(&myStack, stdout); // hopefully, 30 only item on stack!
     return 0;
 }
-
