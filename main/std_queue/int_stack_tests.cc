@@ -1,7 +1,7 @@
 //
 // Created by George Thiruvathukal on 2/17/24.
 //
-
+ 
 #include <gtest/gtest.h>
 
 #include "int_stack.hh"
@@ -70,4 +70,3 @@ int main(int argc, char **argv)
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-
