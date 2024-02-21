@@ -1,4 +1,5 @@
 // main.c
+#include "wordlist.h"
 #include "int_stack.h"
 #include <stdio.h>
 

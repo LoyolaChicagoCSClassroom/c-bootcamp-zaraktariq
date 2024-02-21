@@ -1,5 +1,6 @@
 // main.c
 #include "int_stack.h"
+#include "int_stack.c"
 #include <stdio.h>
 
 
