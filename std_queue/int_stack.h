@@ -4,8 +4,8 @@
 #define INT_STACK_H
 
 #include <stdio.h>
-#include <sys/queue.h> 
- 
+#include <sys/queue.h>
+
 typedef struct int_entry {
     int value;
     SLIST_ENTRY(int_entry) entries;
@@ -31,14 +31,8 @@ extern int int_stack_swap(int_stack_t *stk);
 extern int int_stack_2swap(int_stack_t *stk);
 extern int int_stack_2dup(int_stack_t *stk); 
 extern int int_stack_add(int_stack_t *stk);
-extern int int_stack_subtract(int_stack_t *stk);
-extern int int_stack_multiply(int_stack_t *stk);
-extern int int_stack_divide(int_stack_t *stk);
 extern void int_stack_print(int_stack_t *stk, FILE *file);
-extern int int_stack_size(int_stack_t* stk); 
+extern int int_stack_size(int_stack_t* stk);
 extern int int_stack_capacity(int_stack_t* stk);
-extern int int_stack_equals(int_stack_t *stk);
-extern int int_stack_less_than(int_stack_t *stk);
-extern int int_stack_greater_than(int_stack_t *stk);
 
 #endif // INT_STACK_H
