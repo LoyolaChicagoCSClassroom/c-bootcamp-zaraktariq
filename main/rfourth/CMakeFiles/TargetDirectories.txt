@@ -1,0 +1,3 @@
+/workspace/c-bootcamp-zaraktariq/main/rfourth/CMakeFiles/main.dir
+/workspace/c-bootcamp-zaraktariq/main/rfourth/CMakeFiles/edit_cache.dir
+/workspace/c-bootcamp-zaraktariq/main/rfourth/CMakeFiles/rebuild_cache.dir
