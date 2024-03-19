@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/main.dir/main.c.o CMakeFiles/main.dir/int_stack.c.o CMakeFiles/main.dir/general_stack.c.o CMakeFiles/main.dir/token.c.o CMakeFiles/main.dir/resolveActions.c.o -o main 
