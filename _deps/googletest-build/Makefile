@@ -57,10 +57,10 @@ RM = /home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /workspace/c-bootcamp-zaraktariq
+CMAKE_SOURCE_DIR = /workspace/c-bootcamp-zaraktariq/_deps/googletest-subbuild
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspace/c-bootcamp-zaraktariq
+CMAKE_BINARY_DIR = /workspace/c-bootcamp-zaraktariq/_deps/googletest-subbuild
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -85,61 +85,16 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"gmock\" \"gtest\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/home/linuxbrew/.linuxbrew/Cellar/cmake/3.28.3/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd /workspace/c-bootcamp-zaraktariq && $(CMAKE_COMMAND) -E cmake_progress_start /workspace/c-bootcamp-zaraktariq/CMakeFiles /workspace/c-bootcamp-zaraktariq/_deps/googletest-build//CMakeFiles/progress.marks
-	cd /workspace/c-bootcamp-zaraktariq && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/googletest-build/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/c-bootcamp-zaraktariq/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/c-bootcamp-zaraktariq/_deps/googletest-subbuild/CMakeFiles /workspace/c-bootcamp-zaraktariq/_deps/googletest-subbuild//CMakeFiles/progress.marks
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/c-bootcamp-zaraktariq/_deps/googletest-subbuild/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /workspace/c-bootcamp-zaraktariq && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/googletest-build/clean
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
 .PHONY : clean
 
 # The main clean target
@@ -148,18 +103,31 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /workspace/c-bootcamp-zaraktariq && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/googletest-build/preinstall
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /workspace/c-bootcamp-zaraktariq && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/googletest-build/preinstall
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /workspace/c-bootcamp-zaraktariq && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named googletest-populate
+
+# Build rule for target.
+googletest-populate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 googletest-populate
+.PHONY : googletest-populate
+
+# fast build rule for target.
+googletest-populate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/googletest-populate.dir/build.make CMakeFiles/googletest-populate.dir/build
+.PHONY : googletest-populate/fast
 
 # Help Target
 help:
@@ -168,11 +136,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... googletest-populate"
 .PHONY : help
 
 
@@ -184,6 +149,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /workspace/c-bootcamp-zaraktariq && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
